@@ -1,6 +1,7 @@
 # DevOps Practice App
 
 print("Starting DevOps Practice App...")
+print("Workflow added - basic")
 
 name = "Vrushank"
 print("User:", name)
