@@ -1,0 +1,44 @@
+name: Advanced Workflow
+
+on:
+  push:
+    branches:
+      - advanced-workflow
+
+jobs:
+
+  run-app:
+    runs-on: ubuntu-latest
+
+    outputs:
+      result: ${{ steps.set-result.outputs.result }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Python script
+        id: run_script
+        run: python3 app.py
+
+      - name: Set result
+        id: set-result
+        run: echo "result=success" >> $GITHUB_OUTPUT
+
+  notify-success:
+    needs: run-app
+    if: success()
+
+    uses: ./.github/workflows/slack-notify.yml
+    with:
+      status: "SUCCESS"
+      message: "Application ran successfully!"
+
+  notify-failure:
+    needs: run-app
+    if: failure()
+
+    uses: ./.github/workflows/slack-notify.yml
+    with:
+      status: "FAILURE"
+      message: "Application failed!"

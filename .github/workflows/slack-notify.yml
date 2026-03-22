@@ -1,0 +1,22 @@
+name: Slack Notify (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      status:
+        required: true
+        type: string
+      message:
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Simulate Slack Notification
+        run: |
+          echo "Sending Slack Notification..."
+          echo "Status: ${{ inputs.status }}"
+          echo "Message: ${{ inputs.message }}"
