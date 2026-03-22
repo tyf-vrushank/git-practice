@@ -3,7 +3,7 @@ name : Basic workflow
 on :
   push:
    branches:
-    - main:
+    - main
 jobs:
    run-python:
      runs-on : ubuntu-latest
