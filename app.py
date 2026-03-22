@@ -22,6 +22,6 @@ else:
 
 # Simulated failure (use later in GitHub Actions)
 # Uncomment this line to test failure cases
-# raise Exception("Simulated error!")
+raise Exception("Simulated error!")
 
 print("Program completed successfully!")
