@@ -1,0 +1,30 @@
+name: Workflow 2 - Job Dependencies
+
+on:
+  push:
+    branches:
+      - slack-notify/6377
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build step
+        run: |
+         echo "Building the application"
+         date
+      - name: simulate build
+        run: sleep 5  
+        
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: test step
+        run: |
+         echo "Running tests"
+         date
+      - name: Simulate test
+        run: sleep 3
