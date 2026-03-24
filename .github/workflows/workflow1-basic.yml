@@ -23,4 +23,4 @@ jobs:
       - name: Step 5 - Show environment
         run: env
       - name: Step 6 - Run python file
-        run: echo python3 qpp.py
+        run: echo python3 app.py
