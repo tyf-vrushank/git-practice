@@ -9,10 +9,18 @@ jobs:
   hello-job:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Step 1 - Say Hello
         run: echo "Hello, CI/CD started!"
       - name: Step 2 - Show branch
         run: |
           echo " Branch: $GITHUB_REF "
       - name: Step 3 - Show files
-        run: ls -la        
+        run: ls -la
+      - name: Step 4 - Show current directory
+        run: pwd
+      - name: Step 5 - Show environment
+        run: env
+      - name: Step 6 - Run python file
+        run: echo python3 qpp.py
