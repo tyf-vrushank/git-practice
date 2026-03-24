@@ -1,0 +1,43 @@
+name: Workflow 4 - Terraform simulation
+on:
+  push:
+    branches:
+      - slack-notify/6377
+
+jobs:
+  terraform: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Terraform init 
+        run: |
+          echo "Initialising Terraform"
+          sleep 3
+      - name: Terraform Plan
+        run: |
+          echo "Generating Terraform plan"
+          sleep 4
+      - name: Terraform Apply
+        run: |
+          echo "Applying Terraform changes"
+          sleep 3
+      - name: Simulate failure
+        run: |
+          echo "Simulating failure"
+          exit 1
+  notify:
+    runs-on: ubuntu-latest
+    needs: terraform
+    if: always()
+
+    steps:
+      - name: Notify based on result
+        run: |
+          echo "Terraform Job Result: ${{ needs.terraform.result }}"
+          if [ "${{ needs.terraform.result }}" == "success" ]; then
+            echo "Terraform applied successfully"
+          else
+            echo "Terraform apply failed"
+          fi
